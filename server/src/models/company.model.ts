@@ -1,9 +1,8 @@
 export class Company {
-    key: number;
+    key?: number;
     name: string;
 
-    constructor(key: number, name: string) {
-        this.key = key;
+    constructor( name: string) {
         this.name = name;
     }
 }
