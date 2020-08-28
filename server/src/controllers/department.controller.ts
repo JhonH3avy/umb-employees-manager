@@ -48,4 +48,15 @@ export class DepartmentController {
             res.status(400).end();
         }
     }
+
+    delete = async (req: Request, res: Response): Promise<void> => {
+        const departmentKey = Number.parseInt(req.params.key, 10);
+        try {
+            await this.service.deleteDepartment(departmentKey);
+            res.status(200).end();
+        } catch (e) {
+            console.error(e);
+            res.status(400).end();
+        }
+    }
 }

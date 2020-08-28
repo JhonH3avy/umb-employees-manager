@@ -61,4 +61,13 @@ export class DepartmentService {
         }
         return department;
     }
+
+    async deleteDepartment(departmentKey: number): Promise<void> {
+        const conn = await this.context.getConnectionFromPool();
+        const result = await conn.query('DELETE FROM departments WHERE department_key = ?',
+                                        [departmentKey]);
+        if (result.affectedRows === 0) {
+            throw new Error('could not be possible to insert employee');
+        }
+    }
 }

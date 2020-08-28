@@ -62,4 +62,13 @@ export class EmployeeService {
         }
         return employee;
     }
+
+    async deleteEmployee(employeeKey: number): Promise<void> {
+        const conn = await this.context.getConnectionFromPool();
+        const result = await conn.query('DELETE FROM employees WHERE employee_key = ?',
+                                        [employeeKey]);
+        if (result.affectedRows === 0) {
+            throw new Error('could not be possible to insert employee');
+        }
+    }
 }

@@ -48,4 +48,15 @@ export class CompanyController {
             res.status(400).end();
         }
     }
+
+    delete = async (req: Request, res: Response): Promise<void> => {
+        const companyKey = Number.parseInt(req.params.key, 10);
+        try {
+            await this.service.deleteCompany(companyKey);
+            res.status(200).end();
+        } catch (e) {
+            console.error(e);
+            res.status(400).end();
+        }
+    }
 }

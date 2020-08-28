@@ -51,6 +51,17 @@ export class EmployeeController {
             res.status(400).end();
         }
     }
+
+    delete = async (req: Request, res: Response): Promise<void> => {
+        const employeeKey = Number.parseInt(req.params.key, 10);
+        try {
+            await this.service.deleteEmployee(employeeKey);
+            res.status(200).end();
+        } catch (e) {
+            console.error(e);
+            res.status(400).end();
+        }
+    }
 }
 
 
