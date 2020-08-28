@@ -6,17 +6,14 @@ import env from 'dotenv';
 env.config();
 import { DbContext } from './services/db-context';
 import express from 'express';
-import bodyParser from 'body-parser';
 import { CompanyService } from './services/company.service';
 import { DepartmentService } from './services/department.service';
 
 const context = new DbContext();
 const app = express();
 
-// tslint:disable-next-line: deprecation
-app.use(bodyParser.json());
-// tslint:disable-next-line: deprecation
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const dbContext = new DbContext();
 
