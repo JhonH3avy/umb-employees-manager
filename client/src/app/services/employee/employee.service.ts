@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 })
 export class EmployeeService {
 
-  private readonly controllerName = 'company';
+  private readonly controllerName = 'employee';
 
   constructor(private http: HttpClient) { }
 
@@ -16,8 +16,8 @@ export class EmployeeService {
     return this.http.get<Employee[]>(`${environment.hostUrl}/${this.controllerName}`).toPromise();
   }
 
-  getEmployee(employeeId: string): Promise<Employee> {
-    return this.http.get<Employee>(`${environment.hostUrl}/${this.controllerName}/${employeeId}`).toPromise();
+  getEmployee(employeeKey: number): Promise<Employee> {
+    return this.http.get<Employee>(`${environment.hostUrl}/${this.controllerName}/${employeeKey}`).toPromise();
   }
 
   createEmployee(employee: Employee): Promise<Employee> {
@@ -25,10 +25,10 @@ export class EmployeeService {
   }
 
   updateEmployee(employee: Employee): Promise<Employee> {
-    return this.http.put<Employee>(`${environment.hostUrl}/${this.controllerName}`, employee).toPromise();
+    return this.http.put<Employee>(`${environment.hostUrl}/${this.controllerName}/${employee.key}`, employee).toPromise();
   }
 
-  async deleteEmployee(employeeId: string): Promise<void> {
-    await this.http.delete<boolean>(`${environment.hostUrl}/${this.controllerName}/${employeeId}`).toPromise();
+  async deleteEmployee(employeeKey: number): Promise<void> {
+    await this.http.delete<boolean>(`${environment.hostUrl}/${this.controllerName}/${employeeKey}`).toPromise();
   }
 }

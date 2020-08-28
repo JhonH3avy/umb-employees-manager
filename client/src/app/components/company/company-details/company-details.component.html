@@ -1,1 +1,11 @@
-<p>company-details works!</p>
+<form class="container" [formGroup]="company" (ngSubmit)="createOrUpdate()">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Company name</label>
+    <input type="text" class="form-control" formControlName="name">
+    <label for="exampleInputEmail1">Company Key</label>
+    <input type="text" class="form-control" formControlName="key">
+  </div>
+  <app-department-list [showAll]="false" [companyKey]="this.key.value" *ngIf="this.key.value"></app-department-list>
+  <button routerLink="./department" class="btn btn-link">See all</button>
+  <button type="submit" class="btn btn-primary">Save changes</button>
+</form>

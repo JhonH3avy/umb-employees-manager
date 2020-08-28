@@ -12,6 +12,7 @@ export class EmployeeService {
     async getEmployees(): Promise<Employee[]> {
         const conn = await this.context.getConnectionFromPool();
         const result = await conn.query('SELECT * FROM employees');
+        await conn.end();
         if (Array.isArray(result)) {
             return result.map((e: any) => {
                     const employee = new Employee(e.employee_name, e.department_key);
@@ -25,6 +26,7 @@ export class EmployeeService {
     async getEmployee(employeeKey: number): Promise<Employee> {
         const conn = await this.context.getConnectionFromPool();
         const result = await conn.query('SELECT * FROM employees WHERE employee_key = (?)', [employeeKey]);
+        await conn.end();
         if (Array.isArray(result)) {
             if (result.length === 0) {
                 throw new Error(`There is no employee with key ${employeeKey}`);
@@ -46,6 +48,7 @@ export class EmployeeService {
         const conn = await this.context.getConnectionFromPool();
         const result = await conn.query('INSERT INTO employees (employee_name, department_key) VALUES (?, ?)',
                                         [employee.name, employee.departmentKey]);
+        await conn.end();
         if (result.affectedRows === 0) {
             throw new Error('could not be possible to insert employee');
         }
@@ -57,8 +60,9 @@ export class EmployeeService {
         const conn = await this.context.getConnectionFromPool();
         const result = await conn.query('UPDATE employees SET employee_name = ?, department_key = ? WHERE employee_key = ?',
                                         [employee.name, employee.departmentKey, employee.key]);
+        await conn.end();
         if (result.affectedRows === 0) {
-            throw new Error('could not be possible to insert employee');
+            throw new Error('could not be possible to update employee');
         }
         return employee;
     }
@@ -67,8 +71,9 @@ export class EmployeeService {
         const conn = await this.context.getConnectionFromPool();
         const result = await conn.query('DELETE FROM employees WHERE employee_key = ?',
                                         [employeeKey]);
+        await conn.end();
         if (result.affectedRows === 0) {
-            throw new Error('could not be possible to insert employee');
+            throw new Error('could not be possible to delete employee');
         }
     }
 }

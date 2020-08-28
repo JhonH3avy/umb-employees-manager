@@ -1,1 +1,22 @@
-<p>employee-list works!</p>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Employee name</th>
+    <th scope="col">Details</th>
+    <th scope="col">Remove</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let employee of employees">
+    <th scope="row">{{ employee.key }}</th>
+    <td>{{ employee.name }}</td>
+    <td><button type="button" (click)="details(employee.key)" class="btn btn-success">Details</button></td>
+    <td><button type="button" (click)="remove(employee.key)" class="btn btn-danger">Remove</button></td>
+  </tr>
+  <tr>
+    <th><button type="button" (click)="create()" class="btn btn-dark">Create new employee</button></th>
+  </tr>
+  </tbody>
+
+</table>

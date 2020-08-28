@@ -11,8 +11,11 @@
   <tr *ngFor="let company of companies">
     <th scope="row">{{ company.key }}</th>
     <td>{{ company.name }}</td>
-    <td><button>Details</button></td>
-    <td><button>Remove</button>></td>
+    <td><button type="button" (click)="details(company.key)" class="btn btn-success">Details</button></td>
+    <td><button type="button" (click)="remove(company.key)" class="btn btn-danger">Remove</button></td>
+  </tr>
+  <tr>
+    <th><button type="button" (click)="create()" class="btn btn-dark">Create new company</button></th>
   </tr>
   </tbody>
 </table>

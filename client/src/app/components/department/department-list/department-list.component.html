@@ -1,1 +1,21 @@
-<p>department-list works!</p>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Department name</th>
+    <th scope="col">Details</th>
+    <th scope="col">Remove</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let department of departments">
+    <th scope="row">{{ department.key }}</th>
+    <td>{{ department.name }}</td>
+    <td><button type="button" (click)="details(department.key)" class="btn btn-success">Details</button></td>
+    <td><button type="button" (click)="remove(department.key)" class="btn btn-danger">Remove</button></td>
+  </tr>
+  <tr>
+    <th><button type="button" (click)="create()" class="btn btn-dark">Create new department</button></th>
+  </tr>
+  </tbody>
+</table>

@@ -11,6 +11,10 @@ import { DepartmentDetailsComponent } from './components/department/department-d
 import { DepartmentListComponent } from './components/department/department-list/department-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found/page-not-found.component';
+import { NavbarComponent } from './components/shared/navbar/navbar/navbar.component';
+import { FooterComponent } from './components/shared/footer/footer/footer.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,13 +24,18 @@ import { HttpClientModule } from '@angular/common/http';
     CompanyListComponent,
     CompanyDetailsComponent,
     DepartmentDetailsComponent,
-    DepartmentListComponent
+    DepartmentListComponent,
+    PageNotFoundComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

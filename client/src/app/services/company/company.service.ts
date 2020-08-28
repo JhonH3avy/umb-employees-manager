@@ -1,6 +1,6 @@
 import { Company } from './../../models/company.model';
 import { environment } from './../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -16,19 +16,19 @@ export class CompanyService {
     return this.http.get<Company[]>(`${environment.hostUrl}/${this.controllerName}`).toPromise();
   }
 
-  getCompany(employeeId: string): Promise<Company> {
-    return this.http.get<Company>(`${environment.hostUrl}/${this.controllerName}/${employeeId}`).toPromise();
+  getCompany(companyKey: number): Promise<Company> {
+    return this.http.get<Company>(`${environment.hostUrl}/${this.controllerName}/${companyKey}`).toPromise();
   }
 
-  createCompany(employee: Company): Promise<Company> {
-    return this.http.post<Company>(`${environment.hostUrl}/${this.controllerName}`, employee).toPromise();
+  createCompany(company: Company): Promise<Company> {
+    return this.http.post<Company>(`${environment.hostUrl}/${this.controllerName}`, company).toPromise();
   }
 
-  updateCompany(employee: Company): Promise<Company> {
-    return this.http.put<Company>(`${environment.hostUrl}/${this.controllerName}`, employee).toPromise();
+  updateCompany(company: Company): Promise<Company> {
+    return this.http.put<Company>(`${environment.hostUrl}/${this.controllerName}/${company.key}`, company).toPromise();
   }
 
-  deleteCompany(employeeId: string): Promise<boolean> {
-    return this.http.delete<boolean>(`${environment.hostUrl}/${this.controllerName}/${employeeId}`).toPromise();
+  deleteCompany(companyKey: number): Promise<boolean> {
+    return this.http.delete<boolean>(`${environment.hostUrl}/${this.controllerName}/${companyKey}`).toPromise();
   }
 }

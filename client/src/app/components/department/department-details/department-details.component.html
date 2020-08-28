@@ -1,1 +1,17 @@
-<p>department-details works!</p>
+<form class="container" [formGroup]="department" (ngSubmit)="createOrUpdate()">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Department name</label>
+    <input type="text" class="form-control" formControlName="name">
+    <label for="exampleInputEmail1">Department Key</label>
+    <input type="text" class="form-control" formControlName="key">
+    <div ngbDropdown class="d-inline-block">
+      <button type="button" class="btn btn-outline-primary" ngbDropdownToggle>{{ currentCompany?.name }}</button>
+      <div ngbDropdownMenu>
+        <button type="button" ngbDropdownItem *ngFor="let company of companies" (click)="setNewCompany(company)">{{ company.name }}</button>
+      </div>
+    </div>
+  </div>
+  <app-employee-list [showAll]="false" [departmentKey]="this.key.value" *ngIf="this.key.value"></app-employee-list>
+  <button routerLink="./employee" class="btn btn-link">See all</button>
+  <button type="submit" class="btn btn-primary" [disabled]="department.invalid">Save changes</button>
+</form>

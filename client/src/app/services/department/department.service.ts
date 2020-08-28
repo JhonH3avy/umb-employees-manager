@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class DepartmentService {
 
-  private readonly controllerName = 'company';
+  private readonly controllerName = 'department';
 
   constructor(private http: HttpClient) { }
 
@@ -16,19 +16,19 @@ export class DepartmentService {
     return this.http.get<Department[]>(`${environment.hostUrl}/${this.controllerName}`).toPromise();
   }
 
-  getDepartment(employeeId: string): Promise<Department> {
-    return this.http.get<Department>(`${environment.hostUrl}/${this.controllerName}/${employeeId}`).toPromise();
+  getDepartment(departmentKey: number): Promise<Department> {
+    return this.http.get<Department>(`${environment.hostUrl}/${this.controllerName}/${departmentKey}`).toPromise();
   }
 
-  createDepartment(employee: Department): Promise<Department> {
-    return this.http.post<Department>(`${environment.hostUrl}/${this.controllerName}`, employee).toPromise();
+  createDepartment(department: Department): Promise<Department> {
+    return this.http.post<Department>(`${environment.hostUrl}/${this.controllerName}`, department).toPromise();
   }
 
-  updateDepartment(employee: Department): Promise<Department> {
-    return this.http.put<Department>(`${environment.hostUrl}/${this.controllerName}`, employee).toPromise();
+  updateDepartment(department: Department): Promise<Department> {
+    return this.http.put<Department>(`${environment.hostUrl}/${this.controllerName}/${department.key}`, department).toPromise();
   }
 
-  async deleteDepartment(employeeId: string): Promise<void> {
-    await this.http.delete<boolean>(`${environment.hostUrl}/${this.controllerName}/${employeeId}`).toPromise();
+  async deleteDepartment(departmentKey: number): Promise<void> {
+    await this.http.delete<boolean>(`${environment.hostUrl}/${this.controllerName}/${departmentKey}`).toPromise();
   }
 }

@@ -1,1 +1,16 @@
-<p>employee-details works!</p>
+<form class="container" [formGroup]="employee" (ngSubmit)="createOrUpdate()">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Employee name</label>
+    <input type="text" class="form-control" formControlName="name">
+    <label for="exampleInputEmail1">Employee Key</label>
+    <input type="text" class="form-control" formControlName="key">
+    <div ngbDropdown class="d-inline-block">
+      <button type="button" class="btn btn-outline-primary" ngbDropdownToggle>{{ currentDepartment?.name }}</button>
+      <div ngbDropdownMenu>
+        <button type="button"  ngbDropdownItem type="button" *ngFor="let department of departments" (click)="setNewDepartment(department)">{{ department.name }}</button>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="employee.invalid">Save changes</button>
+</form>
+

@@ -9,6 +9,8 @@ import express from 'express';
 import { CompanyService } from './services/company.service';
 import { DepartmentService } from './services/department.service';
 
+import cors from 'cors';
+
 const context = new DbContext();
 const app = express();
 
@@ -20,6 +22,8 @@ const dbContext = new DbContext();
 const companyController = new CompanyController(new CompanyService(dbContext));
 const departmentController = new DepartmentController(new DepartmentService(dbContext));
 const employeeController = new EmployeeController(new EmployeeService(dbContext));
+
+app.use(cors());
 
 app.get('/company', companyController.companies);
 app.get('/company/:key', companyController.company);

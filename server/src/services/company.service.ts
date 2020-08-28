@@ -11,6 +11,7 @@ export class CompanyService {
     async getCompanies(): Promise<Company[]> {
         const conn = await this.context.getConnectionFromPool();
         const result = await conn.query('SELECT * FROM companies');
+        await conn.end();
         if (Array.isArray(result)) {
             return result.map((e: any) => {
                     const company = new Company(e.company_name);
@@ -24,6 +25,7 @@ export class CompanyService {
     async getCompany(companyKey: number): Promise<Company> {
         const conn = await this.context.getConnectionFromPool();
         const result = await conn.query('SELECT * FROM companies WHERE company_key = (?)', [companyKey]);
+        await conn.end();
         if (Array.isArray(result)) {
             if (result.length === 0) {
                 throw new Error(`There is no company with key ${companyKey}`);
@@ -45,6 +47,7 @@ export class CompanyService {
         const conn = await this.context.getConnectionFromPool();
         const result = await conn.query('INSERT INTO companies (company_name) VALUES (?)',
                                         [company.name]);
+        await conn.end();
         if (result.affectedRows === 0) {
             throw new Error('could not be possible to insert company');
         }
@@ -56,8 +59,9 @@ export class CompanyService {
         const conn = await this.context.getConnectionFromPool();
         const result = await conn.query('UPDATE companies SET company_name = ? WHERE employee_key = ?',
                                         [company.name, company.key]);
+        await conn.end();
         if (result.affectedRows === 0) {
-            throw new Error('could not be possible to insert company');
+            throw new Error('could not be possible to update company');
         }
         return company;
     }
@@ -66,8 +70,9 @@ export class CompanyService {
         const conn = await this.context.getConnectionFromPool();
         const result = await conn.query('DELETE FROM companies WHERE company_key = ?',
                                         [companyKey]);
+        await conn.end();
         if (result.affectedRows === 0) {
-            throw new Error('could not be possible to insert employee');
+            throw new Error('could not be possible to delete employee');
         }
     }
 }
