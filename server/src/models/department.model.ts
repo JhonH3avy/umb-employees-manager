@@ -1,10 +1,9 @@
 export class Department {
-    key: number;
+    key?: number;
     name: string;
     companyKey: number;
 
-    constructor(key: number, name: string, companyKey: number) {
-        this.key = key;
+    constructor(name: string, companyKey: number) {
         this.name = name;
         this.companyKey = companyKey;
     }
